@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import WeatherApp from './WeatherApp/WeatherApp';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import notFound from './NotFound';
+import NotFound from './NotFound';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +12,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WeatherApp/>}>          
-          <Route path="*" element={<notFound/>}/>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes> 
     </BrowserRouter>

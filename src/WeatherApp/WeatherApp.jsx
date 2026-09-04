@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { div } from "framer-motion/client";
 
 export default function Weather() {
   const [weather, setWeather] = useState(null);
@@ -11,27 +10,27 @@ export default function Weather() {
 
   const API_KEY = process.env.REACT_APP_API_KEY;
   
-  const fetchWeather = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7&aqi=no&alerts=no`
-      );
-      setWeather(response.data);
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchWeather = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7&aqi=no&alerts=no`
+        );
+        setWeather(response.data);
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchWeather();
 
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, [city]);
+  }, [API_KEY, city]);
 
   return (
     <div className="p-4 bg-gradient-to-tr from-pink-500 via-purple-800 to-red-400 min-h-screen">
